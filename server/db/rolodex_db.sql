@@ -1,0 +1,6 @@
+DROP USER IF EXISTS admin;
+DROP DATABASE IF EXISTS ng_rolodex;
+
+CREATE USER admin WITH PASSWORD 'password';
+CREATE DATABASE ng_rolodex WITH OWNER admin;
+
