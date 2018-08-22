@@ -24,7 +24,7 @@ export class ContactsComponent implements OnInit {
   deleteContact(contact) {
     this.backend.deleteContact(contact.id)
       .then(result => {
-        location.reload(true);
+        this.ngOnInit()
       })
   }
 }

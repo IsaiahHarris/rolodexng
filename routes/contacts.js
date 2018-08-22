@@ -2,16 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Contact = require('../server/db/models/Contact')
 
-
-
 router.route('/')
   .delete((req, res) => {
     const id = req.query.contact;
-    console.log('delete route')
+
     if (id) {
       return new Contact({ id: id })
         .destroy()
         .then(users => {
+          console.log('delete route')
           return Contact
             .fetchAll()
             .then(contacts => {
@@ -41,6 +40,7 @@ router.route('/')
       return Contact
         .fetchAll()
         .then(contacts => {
+          console.log('get route')
           return res.json(contacts)
         })
     }
