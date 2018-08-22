@@ -15,6 +15,11 @@ import { HeaderComponent } from './components/header/header.components';
 
 //services
 import { BackendService } from './services/backend.service';
+import { RegisterComponent } from './pages/register/register.component';
+import { SessionService } from './services/session.service';
+import { AuthService } from './services/auth.service';
+import { LogoutComponent } from './pages/logout/logout.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +27,9 @@ import { BackendService } from './services/backend.service';
     HomeComponent,
     LoginComponent,
     AddContactComponent,
-    ContactsComponent
+    ContactsComponent,
+    RegisterComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +40,18 @@ import { BackendService } from './services/backend.service';
         { path: '', component: HomeComponent },
         { path: 'login', component: LoginComponent },
         { path: 'addcontact', component: AddContactComponent },
-        { path: 'contacts', component: ContactsComponent }
+        { path: 'contacts', component: ContactsComponent },
+        { path: 'register', component: RegisterComponent },
+        { path: 'logout', component: LogoutComponent },
+        { path: '**', redirectTo: '', pathMatch: 'full' }
       ]
     )
   ],
-  providers: [BackendService],
+  providers: [
+    BackendService,
+    SessionService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

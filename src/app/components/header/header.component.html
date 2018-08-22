@@ -1,17 +1,26 @@
 <div class="header-container">
   <div class="header-title">ROLODEX</div>
   <ul>
-    <li>
-      <a routerLink="/">Home</a>
+    <li *ngIf="isLoggedIn()">
+      Welcome, {{user.username}}
     </li>
     <li>
-      <a routerLink="login">Login</a>
+      <a routerLink="/">Home</a>
     </li>
     <li>
       <a routerLink="addcontact">Add Contact</a>
     </li>
     <li>
       <a routerLink="contacts">Your Contacts</a>
+    </li>
+    <li>
+      <a routerLink="register">Register</a>
+    </li>
+    <li *ngIf="!isLoggedIn()">
+      <a routerLink="login">Login</a>
+    </li>
+    <li *ngIf="!isLoggedIn()">
+      <a routerLink="logout">Logout</a>
     </li>
   </ul>
 </div>
