@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AddContactComponent } from './pages/addContact/addcontact.component';
+import { ContactsComponent } from './pages/contacts/contacts.component';
 
 //shared components
 import { HeaderComponent } from './components/header/header.components';
@@ -20,7 +21,8 @@ import { BackendService } from './services/backend.service';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    AddContactComponent
+    AddContactComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { BackendService } from './services/backend.service';
       [
         { path: '', component: HomeComponent },
         { path: 'login', component: LoginComponent },
-        { path: 'addcontact', component: AddContactComponent }
+        { path: 'addcontact', component: AddContactComponent },
+        { path: 'contacts', component: ContactsComponent }
       ]
     )
   ],

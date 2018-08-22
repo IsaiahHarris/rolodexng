@@ -15,4 +15,10 @@ export class BackendService {
     const contactUrl = this.url + 'contacts';
     return this.http.post(contactUrl, data).toPromise()
   }
+
+  getContacts() {
+    console.log('getting contacts')
+    const contactUrl = this.url + 'contacts/?users=1';
+    return this.http.get(contactUrl).toPromise()
+  }
 }

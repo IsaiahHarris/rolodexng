@@ -1,0 +1,17 @@
+<div class="contacts-header-container">
+  <div (onload)="showContacts()"> {{user}}'s Contacts:</div>
+</div>
+
+<ul>
+  <li *ngFor="let contact of contacts">
+    <div class="contact-name">{{contact.name}}</div>
+    <div class="contact-detail">{{contact.mobile}}</div>
+    <div class="contact-detail">{{contact.work}}</div>
+    <div class="contact-detail">{{contact.home}}</div>
+    <div class="contact-detail">{{contact.email}}</div>
+    <div class="contact-detail">{{contact.address}}</div>
+    <div class="contact-detail">{{contact.github}}</div>
+    <div class="contact-detail">{{contact.instagram}}</div>
+    <div class="contact-detail">{{contact.twitter}}</div>
+  </li>
+</ul>
