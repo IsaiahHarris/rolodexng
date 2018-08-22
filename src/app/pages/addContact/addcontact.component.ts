@@ -69,6 +69,15 @@ export class AddContactComponent {
   submitForm() {
     this.backend.contact(this.formData)
       .then(response => {
+        this.formData.name = '';
+        this.formData.address = '';
+        this.formData.github = '';
+        this.formData.mobile = '';
+        this.formData.home = '';
+        this.formData.work = '';
+        this.formData.instagram = '';
+        this.formData.twitter = '';
+        this.formData.email = '';
         console.log(response)
       })
   }
