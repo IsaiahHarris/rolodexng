@@ -5,13 +5,86 @@ const Redis = require('connect-redis')(session);
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcrypt');
+const saltedRounds = 12;
 const bodyParser = require('body-parser');
 const routes = require('../routes');
 const PORT = process.env.PORT || 8080
-
+const User = require('./db/models/User')
 app.use(express.static('../public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+
+app.use(session({
+  store: new Redis(),
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  return done(null, {
+    id: user.id,
+    name: user.name
+  })
+})
+
+passport.deserializeUser((user, done) => {
+  new User({ id: user.id })
+    .fetch()
+    .then(user => {
+      if (!user) {
+        return done(null, false)
+      } else {
+        user = user.toJSON();
+        return done(null, {
+          id: user.id,
+          username: user.username
+        })
+      }
+    })
+    .catch(err => {
+      console.log('err.message', err.message);
+      return done(err)
+    })
+})
+
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    return new User({ username })
+      .fetch()
+      .then(user => {
+        if (user === null) {
+          return done(null, false, { message: 'bad username or password' })
+        } else {
+          user = user.toJSON()
+          bcrypt.compare(password, user.password)
+            .then(samePassword => {
+              if (samePassword) {
+                return done(null, user)
+              } else {
+                return done(null, false, { message: 'bad username or password' })
+              }
+            })
+        }
+      })
+      .catch(err => {
+        return done(err)
+      })
+  }
+))
+
+app.post('/register', (req, res) => {
+  bcrypt.genSalt(saltedRounds, (err, salt) => {
+    if (err) {
+
+    }
+  })
+})
 
 app.use('/api', routes);
 
