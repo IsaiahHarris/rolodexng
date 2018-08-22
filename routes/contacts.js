@@ -3,6 +3,7 @@ const router = express.Router();
 const Contact = require('../server/db/models/Contact')
 
 
+
 router.route('/')
   .delete((req, res) => {
     const id = req.query.contact;
@@ -24,7 +25,6 @@ router.route('/')
   })
   .get((req, res) => {
     const id = req.query.contact
-    console.log('id', id);
     if (id) {
       return Contact
         .query({ where: { id: id } })
@@ -34,6 +34,12 @@ router.route('/')
         })
         .catch(err => {
           console.log('err.message', err.message);
+        })
+    } else {
+      return Contact
+        .fetchAll()
+        .then(contacts => {
+          return res.json(contacts)
         })
     }
   })
@@ -51,29 +57,29 @@ router.route('/')
       github,
       created_by
     } = req.body
-
-    return new Contact({ id: id })
-      .save({
-        name,
-        address,
-        mobile,
-        work,
-        home,
-        email,
-        twitter,
-        instagram,
-        github,
-        created_by
-      })
-      .then(contact => {
-        return res.json(contact)
-      })
-      .catch(err => {
-        console.log('err.message', err.message);
-      })
-
-
+    if (id) {
+      return new Contact({ id: id })
+        .save({
+          name,
+          address,
+          mobile,
+          work,
+          home,
+          email,
+          twitter,
+          instagram,
+          github,
+          created_by
+        })
+        .then(contact => {
+          return res.json(contact)
+        })
+        .catch(err => {
+          console.log('err.message', err.message);
+        })
+    }
   })
+
 
 router.route('/')
   .get((req, res) => {
@@ -136,12 +142,13 @@ router.route('/')
       })
   })
 
+
 router.route('/search/:term')
   .get((req, res) => {
     const term = req.params.term;
     return Contact
       .query({ where: { name: term } })
-      .fetchAll({ withRelated: ['created'] })
+      .fetchAll()
       .then(contacts => {
         return res.json(contacts)
       })
@@ -149,7 +156,5 @@ router.route('/search/:term')
         console.log('err.message', err.message);
       })
   })
-
-
 
 module.exports = router;
