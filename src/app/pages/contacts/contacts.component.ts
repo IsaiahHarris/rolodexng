@@ -17,8 +17,14 @@ export class ContactsComponent implements OnInit {
   ngOnInit() {
     this.backend.getContacts()
       .then(result => {
-        console.log(result);
+        console.log('get all', result)
         this.contacts = result
+      })
+  }
+  deleteContact(contact) {
+    this.backend.deleteContact(contact.id)
+      .then(result => {
+        location.reload(true);
       })
   }
 }

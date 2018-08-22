@@ -7,6 +7,7 @@ const Contact = require('../server/db/models/Contact')
 router.route('/')
   .delete((req, res) => {
     const id = req.query.contact;
+    console.log('delete route')
     if (id) {
       return new Contact({ id: id })
         .destroy()
@@ -14,6 +15,7 @@ router.route('/')
           return Contact
             .fetchAll()
             .then(contacts => {
+              console.log('refreshed')
               return res.json(contacts)
             })
         })
@@ -83,10 +85,8 @@ router.route('/')
 
 router.route('/')
   .get((req, res) => {
-
     const id = req.query.user;
     if (id) {
-
       return Contact
         .query({ where: { created_by: id } })
         .fetchAll()

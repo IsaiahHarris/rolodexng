@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Location } from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -22,8 +22,9 @@ export class BackendService {
     return this.http.get(contactUrl).toPromise()
   }
 
-  deleteContact() {
-    const contactUrl = this.url + 'contacts/:id'
-    return this.http.delete(contactUrl).toPromise()
+  deleteContact(id) {
+    console.log('deleting contact')
+    const contactUrl = this.url + `contacts/?contact=${id}`
+    return this.http.delete(contactUrl).toPromise();
   }
 }

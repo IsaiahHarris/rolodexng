@@ -6,7 +6,7 @@
   <div class="contact-container" *ngFor="let contact of contacts">
     <div class="contact-header">
       <div class="contact-name">{{contact.name}}</div>
-      <div class="delete-button">delete</div>
+      <div (click)="deleteContact(contact)" class="delete-button">delete</div>
     </div>
     <div *ngIf="contact.mobile" class="contact-detail">Mobile: {{contact.mobile}}</div>
     <div *ngIf="contact.work" class="contact-detail">Work: {{contact.work}}</div>
