@@ -21,4 +21,9 @@ export class BackendService {
     const contactUrl = this.url + 'contacts/?users=1';
     return this.http.get(contactUrl).toPromise()
   }
+
+  deleteContact() {
+    const contactUrl = this.url + 'contacts/:id'
+    return this.http.delete(contactUrl).toPromise()
+  }
 }

@@ -3,6 +3,77 @@ const router = express.Router();
 const Contact = require('../server/db/models/Contact')
 
 
+router.route('/')
+  .delete((req, res) => {
+    const id = req.query.contact;
+    if (id) {
+      return new Contact({ id: id })
+        .destroy()
+        .then(users => {
+          return Contact
+            .fetchAll()
+            .then(contacts => {
+              return res.json(contacts)
+            })
+        })
+        .catch(err => {
+          console.log('err.message', err.message);
+        })
+    }
+
+  })
+  .get((req, res) => {
+    const id = req.query.contact
+    console.log('id', id);
+    if (id) {
+      return Contact
+        .query({ where: { id: id } })
+        .fetch()
+        .then(contact => {
+          return res.json(contact)
+        })
+        .catch(err => {
+          console.log('err.message', err.message);
+        })
+    }
+  })
+  .put((req, res) => {
+    const id = req.query.contact;
+    const {
+      name,
+      address,
+      mobile,
+      work,
+      home,
+      email,
+      twitter,
+      instagram,
+      github,
+      created_by
+    } = req.body
+
+    return new Contact({ id: id })
+      .save({
+        name,
+        address,
+        mobile,
+        work,
+        home,
+        email,
+        twitter,
+        instagram,
+        github,
+        created_by
+      })
+      .then(contact => {
+        return res.json(contact)
+      })
+      .catch(err => {
+        console.log('err.message', err.message);
+      })
+
+
+  })
 
 router.route('/')
   .get((req, res) => {
@@ -67,7 +138,6 @@ router.route('/')
 
 router.route('/search/:term')
   .get((req, res) => {
-
     const term = req.params.term;
     return Contact
       .query({ where: { name: term } })
@@ -80,71 +150,6 @@ router.route('/search/:term')
       })
   })
 
-router.route('/:id')
-  .delete((req, res) => {
-    const id = req.params.id;
-    return new Contact({ id: id })
-      .destroy()
-      .then(users => {
-        return Contact
-          .fetchAll()
-          .then(contacts => {
-            return res.json(contacts)
-          })
-      })
-      .catch(err => {
-        console.log('err.message', err.message);
-      })
-  })
-  .get((req, res) => {
-    const id = req.params.id
 
-    return Contact
-      .query({ where: { id: id } })
-      .fetch()
-      .then(contact => {
-        return res.json(contact)
-      })
-      .catch(err => {
-        console.log('err.message', err.message);
-      })
-  })
-  .put((req, res) => {
-    const id = req.params.id;
-    const {
-      name,
-      address,
-      mobile,
-      work,
-      home,
-      email,
-      twitter,
-      instagram,
-      github,
-      created_by
-    } = req.body
-
-    return new Contact({ id: id })
-      .save({
-        name,
-        address,
-        mobile,
-        work,
-        home,
-        email,
-        twitter,
-        instagram,
-        github,
-        created_by
-      })
-      .then(contact => {
-        return res.json(contact)
-      })
-      .catch(err => {
-        console.log('err.message', err.message);
-      })
-
-
-  })
 
 module.exports = router;
