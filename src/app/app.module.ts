@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ContactComponent } from './pages/contact/contact.component';
+import { AddContactComponent } from './pages/addContact/addcontact.component';
 
 //shared components
 import { HeaderComponent } from './components/header/header.components';
@@ -20,7 +20,7 @@ import { BackendService } from './services/backend.service';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    ContactComponent
+    AddContactComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +30,7 @@ import { BackendService } from './services/backend.service';
       [
         { path: '', component: HomeComponent },
         { path: 'login', component: LoginComponent },
-        { path: 'contact', component: ContactComponent }
+        { path: 'addcontact', component: AddContactComponent }
       ]
     )
   ],

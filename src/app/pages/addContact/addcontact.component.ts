@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 @Component({
-  templateUrl: './contact.component.html',
-  styleUrls: ['./contact.component.scss']
+  templateUrl: './addcontact.component.html',
+  styleUrls: ['./addcontact.component.scss']
 })
 
-export class ContactComponent {
+export class AddContactComponent {
   formData: {
     name: string,
     email: string,
