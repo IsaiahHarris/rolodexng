@@ -58,10 +58,20 @@ export class AddContactComponent {
     }
   }
 
+  validateEmail() {
+    this.emailErrors.length = 0;
+    if (!this.formData.email.includes('@')) {
+      this.emailErrors.push('Email may not be valid')
+    }
+  }
+
   getNameErrors() {
     return this.nameErrors.join(', ')
   }
 
+  getEmailErrors() {
+    return this.emailErrors.join(', ')
+  }
   submitDisabled() {
     return !(this.nameValid)
   }

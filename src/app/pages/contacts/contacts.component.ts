@@ -14,13 +14,22 @@ export class ContactsComponent implements OnInit {
     this.user = 'Isaiah';
     this.contacts = [];
   }
+  sortContacts(result) {
+    this.contacts = result.sort(function (a, b) {
+      console.log(a.name)
+      var textA = a.name
+      var textB = b.name
+      return (textA > textB)
+    });
+  }
+
   ngOnInit() {
     this.backend.getContacts()
       .then(result => {
-        console.log('get all', result)
-        this.contacts = result
+        this.sortContacts(result)
       })
   }
+
   deleteContact(contact) {
     this.backend.deleteContact(contact.id)
       .then(result => {

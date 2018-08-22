@@ -31,7 +31,7 @@
       <label for="email">Email:</label>
       <input type="text" name="email" [(ngModel)]="formData.email" (keyup)="validateEmail()">
       <div class="errors">
-        {{getEmailErrors}}
+        {{getEmailErrors()}}
       </div>
     </div>
     <div class="input-group">
