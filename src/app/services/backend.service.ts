@@ -27,4 +27,19 @@ export class BackendService {
     const contactUrl = this.url + `contacts/?contact=${id}`
     return this.http.delete(contactUrl).toPromise();
   }
+
+  register(data) {
+    const registerUrl = this.url + 'register';
+    return this.http.post(registerUrl, data).toPromise();
+  }
+
+  login(data) {
+    const loginUrl = this.url + 'login';
+    return this.http.post(loginUrl, data).toPromise()
+  }
+
+  logout() {
+    const logoutUrl = this.url + 'logout';
+    return this.http.get(logoutUrl).toPromise();
+  }
 }
