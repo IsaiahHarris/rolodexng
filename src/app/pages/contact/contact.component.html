@@ -1,0 +1,51 @@
+<div class="contact-page-header-container">
+  <div class="contact-header-page-title">Contacts</div>
+</div>
+
+<div class="contact-page-form-container">
+  <form action="">
+    <div class="input-group">
+      <label for="name">Name:</label>
+      <input type="text" name="name" [(ngModel)]="formData.name" (keyup)="validateName()">
+      <div class="errors">
+        {{getNameErrors()}}
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="address ">Address:</label>
+      <input type="text" name="address" [(ngModel)]="formData.address">
+    </div>
+    <div class="input-group">
+      <label for="mobile">Mobile:</label>
+      <input type="text" name="mobile" [(ngModel)]="formData.mobile">
+    </div>
+    <div class="input-group">
+      <label for="work">Work:</label>
+      <input type="text" name="work" [(ngModel)]="formData.work">
+    </div>
+    <div class="input-group">
+      <label for="home">Home:</label>
+      <input type="text" name="home" [(ngModel)]="formData.home">
+    </div>
+    <div class="input-group">
+      <label for="email">Email:</label>
+      <input type="text" name="email" [(ngModel)]="formData.email" (keyup)="validateEmail()">
+      <div class="errors">
+        {{getEmailErrors}}
+      </div>
+    </div>
+    <div class="input-group">
+      <label for="twitter">Twitter:</label>
+      <input type="text" name="twitter" [(ngModel)]="formData.twitter">
+    </div>
+    <div class="input-group">
+      <label for="instagram">Instagram:</label>
+      <input type="text" name="instagram" [(ngModel)]="formData.instagram">
+    </div>
+    <div class="input-group">
+      <label for="github">Github:</label>
+      <input type="text" name="github" [(ngModel)]="formData.github">
+    </div>
+    <button (click)="submitForm()" [disabled]="submitDisabled()">Submit</button>
+  </form>
+</div>

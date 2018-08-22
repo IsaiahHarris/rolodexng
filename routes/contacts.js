@@ -36,8 +36,7 @@ router.route('/')
       email,
       twitter,
       instagram,
-      github,
-      created_by
+      github
     } = req.body
 
     const contact = {
@@ -50,7 +49,7 @@ router.route('/')
       twitter: twitter ? twitter : null,
       instagram: instagram ? instagram : null,
       github: github ? github : null,
-      created_by: created_by ? created_by : null
+      created_by: 1
     }
 
     return new Contact(contact)
