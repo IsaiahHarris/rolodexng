@@ -78,14 +78,56 @@ passport.use(new LocalStrategy(
   }
 ))
 
-app.post('/register', (req, res) => {
+
+
+
+app.post('/api/register', (req, res) => {
   bcrypt.genSalt(saltedRounds, (err, salt) => {
     if (err) {
-
+      return res.status(500)
+    } else {
+      bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
+        if (err) {
+          return res.status(500)
+        } else {
+          if (req.body.username.length < 1 || req.body.password < 1) {
+            console.log('hi')
+          }
+          return new User({
+            email: req.body.email,
+            username: req.body.username,
+            password: hashedPassword
+          })
+            .save()
+            .then(() => {
+              console.log('hi')
+            })
+            .catch(err => {
+              console.log('hi')
+            })
+        }
+      })
     }
   })
 })
 
+
+app.post('/api/login', (req, res, next) => {
+  req.body.username = req.body.username.toLowerCase();
+  passport.authenticate('local', (err, user, info) => {
+    req.login(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      console.log('loggedin')
+    })
+  })(req, res, next)
+})
+
+app.get('/api/logout', (req, res) => {
+  req.logout();
+  console.log('back to login')
+})
 app.use('/api', routes);
 
 app.get('/', (req, res) => {
