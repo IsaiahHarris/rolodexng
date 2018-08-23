@@ -4,7 +4,6 @@ const session = require('express-session');
 const Redis = require('connect-redis')(session);
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const bcrypt = require('bcrypt');
 const saltedRounds = 12;
 const bodyParser = require('body-parser');
 const routes = require('../routes');
@@ -54,7 +53,7 @@ passport.deserializeUser((user, done) => {
 })
 
 passport.use(new LocalStrategy(
-  function (username, password, done) {
+  function (username, done) {
     return new User({ username })
       .fetch()
       .then(user => {
@@ -62,14 +61,6 @@ passport.use(new LocalStrategy(
           return done(null, false, { message: 'bad username or password' })
         } else {
           user = user.toJSON()
-          bcrypt.compare(password, user.password)
-            .then(samePassword => {
-              if (samePassword) {
-                return done(null, user)
-              } else {
-                return done(null, false, { message: 'bad username or password' })
-              }
-            })
         }
       })
       .catch(err => {
@@ -82,33 +73,16 @@ passport.use(new LocalStrategy(
 
 
 app.post('/api/register', (req, res) => {
-  bcrypt.genSalt(saltedRounds, (err, salt) => {
-    if (err) {
-      return res.status(500)
-    } else {
-      bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
-        if (err) {
-          return res.status(500)
-        } else {
-          if (req.body.username.length < 1 || req.body.password < 1) {
-            console.log('hi')
-          }
-          return new User({
-            email: req.body.email,
-            username: req.body.username,
-            password: hashedPassword
-          })
-            .save()
-            .then(() => {
-              console.log('hi')
-            })
-            .catch(err => {
-              console.log('hi')
-            })
-        }
-      })
-    }
+  return new User({
+    username: req.body.username,
   })
+    .save()
+    .then(() => {
+      return res.status(200)
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 
@@ -119,14 +93,14 @@ app.post('/api/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log('loggedin')
+      return res.status(200)
     })
   })(req, res, next)
 })
 
 app.get('/api/logout', (req, res) => {
   req.logout();
-  console.log('back to login')
+  return res.status(200)
 })
 app.use('/api', routes);
 
