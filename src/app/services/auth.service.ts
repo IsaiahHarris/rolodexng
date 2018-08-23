@@ -11,7 +11,9 @@ export class AuthService {
     private backend: BackendService,
     private session: SessionService
   ) { }
+
   register(data) {
+    console.log('auth')
     return this.backend.register(data)
   }
 

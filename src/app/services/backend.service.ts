@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
   providedIn: 'root'
 })
 export class BackendService {
-  url: string = 'http://localhost:4100/api/'
+  url: string = 'http://localhost:4200/api/'
 
   constructor(private http: HttpClient) {
 
@@ -29,6 +29,7 @@ export class BackendService {
   }
 
   register(data) {
+    console.log('backend')
     const registerUrl = this.url + 'register';
     return this.http.post(registerUrl, data).toPromise();
   }

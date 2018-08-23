@@ -69,19 +69,11 @@ passport.use(new LocalStrategy(
   }
 ))
 
-
-
-
 app.post('/api/register', (req, res) => {
-  return new User({
-    username: req.body.username,
-  })
+  return new User({ username: req.body.username })
     .save()
     .then(() => {
       return res.status(200)
-    })
-    .catch(err => {
-      console.log(err)
     })
 })
 
@@ -93,6 +85,7 @@ app.post('/api/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log('loggedin')
       return res.status(200)
     })
   })(req, res, next)
