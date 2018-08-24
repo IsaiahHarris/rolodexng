@@ -19,7 +19,8 @@ export class HeaderComponent {
   }
 
   isLoggedIn() {
-    return this.session.isLoggedIn();
+
+    return this.session.isLoggedIn()
   }
 
   logout() {

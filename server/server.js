@@ -28,7 +28,7 @@ app.use(passport.session());
 passport.serializeUser((user, done) => {
   return done(null, {
     id: user.id,
-    name: user.name
+    username: user.username
   })
 })
 
@@ -52,49 +52,79 @@ passport.deserializeUser((user, done) => {
     })
 })
 
-passport.use(new LocalStrategy(
-  function (username, done) {
-    return new User({ username })
-      .fetch()
-      .then(user => {
-        if (user === null) {
-          return done(null, false, { message: 'bad username or password' })
-        } else {
-          user = user.toJSON()
-        }
-      })
-      .catch(err => {
-        return done(err)
-      })
-  }
-))
-
-app.post('/api/register', (req, res) => {
-  return new User({ username: req.body.username })
-    .save()
-    .then(() => {
-      return res.status(200)
+passport.use(new LocalStrategy(function (username, password, done) {
+  return new User({ username: username }).fetch()
+    .then(user => {
+      if (user === null) {
+        return done(null, false, { message: 'bad username or password' });
+      } else {
+        user = user.toJSON();
+        bcrypt.compare(password, user.password)
+          .then(samePassword => {
+            if (samePassword) { return done(null, user); }
+            else {
+              return done(null, false, { message: 'bad username or password' });
+            }
+          })
+      }
     })
-})
-
+    .catch(err => {
+      return done(err);
+    });
+}));
 
 app.post('/api/login', (req, res, next) => {
-  req.body.username = req.body.username.toLowerCase();
+  req.body.username = req.body.username
+  console.log(req.body)
   passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return res.json({ message: 'username or password invalid' })
+    }
     req.login(user, (err) => {
-      if (err) {
-        return next(err);
+      if (err) { return next(err); }
+      else {
+        res.json({ username: user.username })
       }
-      console.log('loggedin')
-      return res.status(200)
+    });
+  })(req, res, next);
+});
+
+app.post('/api/register', (req, res) => {
+  let {
+    username,
+    name,
+    email,
+    address
+  } = req.body;
+  bcrypt.genSalt(saltedRounds, (err, salt) => {
+    if (err) { return res.status(500); }
+    bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
+      if (err) { return res.status(500); }
+      return new User({
+        username: username.toLowerCase(),
+        password: hashedPassword,
+        name,
+        email,
+        address
+      })
+        .save()
+        .then((result) => {
+          res.json(result.attributes.username);
+        })
+        .catch(err => {
+          res.json({ message: 'username already exists' })
+        });
     })
-  })(req, res, next)
-})
+  })
+});
+
+
 
 app.get('/api/logout', (req, res) => {
   req.logout();
-  return res.status(200)
-})
+  res.json({ sucess: true })
+});
+
 app.use('/api', routes);
 
 app.get('/', (req, res) => {

@@ -14,7 +14,6 @@ export class SessionService {
     }
 
   constructor() {
-
     //check if in local storage
     let userString = window.localStorage.getItem('user');
     try {
@@ -34,7 +33,8 @@ export class SessionService {
   // parallel login
   setSession(username) {
     this.user.username = username;
-    this.user.loggedIn = true
+    this.user.loggedIn = true;
+    console.log('THIS.USER', this.user)
     //save to local storage
     let userString = JSON.stringify(this.user);
     window.localStorage.setItem('user', userString)
@@ -49,6 +49,7 @@ export class SessionService {
   }
 
   isLoggedIn() {
+    console.log(this.user)
     return this.user.loggedIn
   }
 }

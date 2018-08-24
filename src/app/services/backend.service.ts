@@ -10,6 +10,14 @@ export class BackendService {
   constructor(private http: HttpClient) {
 
   }
+
+  login(data) {
+    console.log('hitting login backend')
+    const loginUrl = this.url + 'login';
+    console.log('loginUrl', loginUrl)
+    return this.http.post(loginUrl, data).toPromise()
+  }
+
   contact(data) {
     console.log(data)
     const contactUrl = this.url + 'contacts';
@@ -34,12 +42,10 @@ export class BackendService {
     return this.http.post(registerUrl, data).toPromise();
   }
 
-  login(data) {
-    const loginUrl = this.url + 'login';
-    return this.http.post(loginUrl, data).toPromise()
-  }
+
 
   logout() {
+    console.log('logout backend service')
     const logoutUrl = this.url + 'logout';
     return this.http.get(logoutUrl).toPromise();
   }

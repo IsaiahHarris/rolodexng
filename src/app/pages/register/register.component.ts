@@ -21,8 +21,10 @@ export class RegisterComponent {
 
   register() {
     this.auth.register(this.registerFormData)
+
     console.log('trying to navigate')
     return this.router.navigate(['login'])
+
 
   }
 }

@@ -2,13 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router'
 @Component({
-  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-
-
   loginFormData: {
     username: string
   } = {
@@ -20,6 +17,8 @@ export class LoginComponent {
   ) { }
 
   login() {
+    console.log('hitting login onclick')
+    console.log(this.loginFormData)
     return this.auth.login(this.loginFormData)
       .then(() => {
         console.log('user logged in')

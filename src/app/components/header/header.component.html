@@ -1,7 +1,7 @@
 <div class="header-container">
   <div class="header-title">ROLODEX</div>
   <ul>
-    <li *ngIf="isLoggedIn()">
+    <li *ngIf="!!(this.session.isLoggedIn())">
       Welcome, {{user.username}}
     </li>
     <li>
