@@ -16,7 +16,6 @@ router.route('/')
 
 router.route('/profile')
   .get((req, res) => {
-    console.log('req.user', req.user)
     const username = req.user.username
     return User
       .query({ where: { username: username } })

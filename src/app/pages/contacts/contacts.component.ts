@@ -64,6 +64,9 @@ export class ContactsComponent implements OnInit {
     this.backend.getContacts()
       .then(result => {
         this.sortContacts(result)
+        this.userData = Object.assign({}, result);
+        this.formData = Object.assign({}, result);
+        console.log(this.formData[0])
       })
   }
 
