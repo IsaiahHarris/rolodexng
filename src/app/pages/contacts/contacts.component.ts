@@ -35,7 +35,6 @@ export class ContactsComponent implements OnInit {
   toggleEdit() {
     if (this.isEdit) {
       this.isEdit = false;
-
     } else {
       this.isEdit = true;
 
@@ -64,15 +63,8 @@ export class ContactsComponent implements OnInit {
   editContact(contact) {
     this.backend.editContact(this.editFormData, contact.id)
       .then(response => {
-        this.editFormData.name = '';
-        this.editFormData.address = '';
-        this.editFormData.github = '';
-        this.editFormData.mobile = '';
-        this.editFormData.home = '';
-        this.editFormData.work = '';
-        this.editFormData.instagram = '';
-        this.editFormData.twitter = '';
-        this.editFormData.email = '';
+        this.ngOnInit()
+        this.toggleEdit()
       })
   }
 
