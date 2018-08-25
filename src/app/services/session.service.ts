@@ -34,7 +34,6 @@ export class SessionService {
   setSession(username) {
     this.user.username = username;
     this.user.loggedIn = true;
-    console.log('THIS.USER', this.user)
     //save to local storage
     let userString = JSON.stringify(this.user);
     window.localStorage.setItem('user', userString)
@@ -49,7 +48,6 @@ export class SessionService {
   }
 
   isLoggedIn() {
-    console.log(this.user)
     return this.user.loggedIn
   }
 }

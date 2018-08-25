@@ -16,12 +16,19 @@ router.route('/')
 
 router.route('/profile')
   .get((req, res) => {
-    const id = req.query.user;
+    console.log('req.user', req.user)
+    const username = req.user.username
     return User
-      .query({ where: { id: id } })
-      .fetchAll({ withRelated: ['created'] })
+      .query({ where: { username: username } })
+      .fetch(['username', 'name', 'email', 'address'])
       .then(user => {
-        return res.json(user)
+        let profileUser = {
+          username: user.attributes.username,
+          name: user.attributes.name,
+          email: user.attributes.email,
+          address: user.attributes.address
+        }
+        return res.json(profileUser)
       })
       .catch(err => {
         console.log('err.message', err.message);

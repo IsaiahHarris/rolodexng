@@ -16,7 +16,6 @@ export class ContactsComponent implements OnInit {
   }
   sortContacts(result) {
     this.contacts = result.sort(function (a, b) {
-      console.log(a.name)
       var textA = a.name
       var textB = b.name
       return (textA > textB)

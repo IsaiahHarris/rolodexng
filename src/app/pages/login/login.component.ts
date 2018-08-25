@@ -17,8 +17,6 @@ export class LoginComponent {
   ) { }
 
   login() {
-    console.log('hitting login onclick')
-    console.log(this.loginFormData)
     return this.auth.login(this.loginFormData)
       .then(() => {
         console.log('user logged in')

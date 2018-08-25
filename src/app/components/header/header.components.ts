@@ -23,7 +23,6 @@ export class HeaderComponent {
   }
 
   logout() {
-    console.log('trying to logout')
     return this.auth.logout();
   }
 }

@@ -88,7 +88,6 @@ export class AddContactComponent {
         this.formData.instagram = '';
         this.formData.twitter = '';
         this.formData.email = '';
-        console.log(response)
       })
   }
 }

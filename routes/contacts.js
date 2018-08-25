@@ -10,11 +10,9 @@ router.route('/')
       return new Contact({ id: id })
         .destroy()
         .then(users => {
-          console.log('delete route')
           return Contact
             .fetchAll()
             .then(contacts => {
-              console.log('refreshed')
               return res.json(contacts)
             })
         })
@@ -40,7 +38,6 @@ router.route('/')
       return Contact
         .fetchAll()
         .then(contacts => {
-          console.log('get route')
           return res.json(contacts)
         })
     }

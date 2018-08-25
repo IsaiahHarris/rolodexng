@@ -76,7 +76,6 @@ passport.use(new LocalStrategy(function (username, password, done) {
 
 app.post('/api/login', (req, res, next) => {
   req.body.username = req.body.username
-  console.log(req.body)
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       return res.json({ message: 'username or password invalid' })
@@ -122,7 +121,6 @@ app.post('/api/register', (req, res) => {
 
 
 app.get('/api/logout', (req, res) => {
-  console.log('logging out server')
   req.logout();
   res.json({ success: true })
 });

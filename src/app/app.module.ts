@@ -9,16 +9,17 @@ import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AddContactComponent } from './pages/addContact/addcontact.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 //shared components
+import { LogoutComponent } from './pages/logout/logout.component';
 import { HeaderComponent } from './components/header/header.components';
 
 //services
 import { BackendService } from './services/backend.service';
-import { RegisterComponent } from './pages/register/register.component';
 import { SessionService } from './services/session.service';
 import { AuthService } from './services/auth.service';
-import { LogoutComponent } from './pages/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { LogoutComponent } from './pages/logout/logout.component';
     AddContactComponent,
     ContactsComponent,
     RegisterComponent,
-    LogoutComponent
+    LogoutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
         { path: 'contacts', component: ContactsComponent },
         { path: 'register', component: RegisterComponent },
         { path: 'logout', component: LogoutComponent },
+        { path: 'profile', component: ProfileComponent },
         { path: '**', redirectTo: '', pathMatch: 'full' }
       ]
     )

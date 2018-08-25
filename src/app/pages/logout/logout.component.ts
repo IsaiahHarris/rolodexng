@@ -17,7 +17,6 @@ export class LogoutComponent {
   constructor(private auth: AuthService) { }
 
   logout() {
-    console.log('logoutbutton pressed')
     return this.auth.logout()
       .then(() => {
         console.log('user logged out')
