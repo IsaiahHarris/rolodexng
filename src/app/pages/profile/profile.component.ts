@@ -16,15 +16,11 @@ export class ProfileComponent implements OnInit {
   userProfile
   isEdit: boolean = false;
 
-  editProfileFormData: {
-    name: string,
-    email: string,
-    address: string,
-  } = {
-      name: '',
-      email: '',
-      address: '',
-    }
+  editProfileFormData = {
+    name: '',
+    email: '',
+    address: ''
+  }
 
   constructor(
     private session: SessionService,
@@ -46,6 +42,8 @@ export class ProfileComponent implements OnInit {
   }
 
   editProfile(profile) {
+    console.log(profile)
+    console.log(this.editProfileFormData)
     this.backend.editProfile(this.editProfileFormData, profile.id)
       .then(result => {
         this.ngOnInit()

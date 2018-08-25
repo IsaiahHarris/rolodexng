@@ -34,12 +34,12 @@ router.route('/profile')
       })
   })
 
-router.route('/:id')
+router.route('/profile')
   .put((req, res) => {
-    let id = req.params.id;
-    let { username, name, email, address } = req.body;
+    let id = req.user.id;
+    let { name, email, address } = req.body;
     return new User({ id: id })
-      .save({ username, name, email, address })
+      .save({ name, email, address }, { patch: true })
       .then(response => {
         return response.refresh({ withRelated: ['created'] })
       })
@@ -47,7 +47,7 @@ router.route('/:id')
         res.json(user)
       })
       .catch(err => {
-        console.log('err.message', err.message);
+        console.log('err.message on put', err.message);
       })
   })
 

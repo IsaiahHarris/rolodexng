@@ -12,19 +12,16 @@
     <div class="input-group">
       <label for="name">Name:</label>
       <input type="text" name="name" [(ngModel)]="editProfileFormData.name">
-      <div class="errors">
-      </div>
     </div>
     <div class="input-group">
       <label for="address ">Address:</label>
-      <input type="text" name="address" value="contact.address" [(ngModel)]="editProfileFormData.address">
+      <input type="text" name="address" [(ngModel)]="editProfileFormData.address">
     </div>
     <div class="input-group">
       <label for="email">Email:</label>
-      <input type="text" name="email" value="contact.email" [(ngModel)]="editProfileFormData.email">
-      <div class="errors">
-      </div>
+      <input type="text" name="email" [(ngModel)]="editProfileFormData.email">
     </div>
-    <button (click)="editContact(contact, contact.id)">Submit</button>
+
+    <button (click)="editProfile(userProfile, user.id)">Submit</button>
   </form>
 </div>
