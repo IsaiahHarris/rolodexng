@@ -5,7 +5,6 @@ const Contact = require('../server/db/models/Contact')
 router.route('/')
   .delete((req, res) => {
     const id = req.query.contact;
-
     if (id) {
       return new Contact({ id: id })
         .destroy()
@@ -23,11 +22,12 @@ router.route('/')
 
   })
   .get((req, res) => {
-    const id = req.query.contact
+    console.log(req.user)
+    const id = req.user.id
     if (id) {
       return Contact
-        .query({ where: { id: id } })
-        .fetch()
+        .query({ where: { created_by: id } })
+        .fetchAll()
         .then(contact => {
           return res.json(contact)
         })
@@ -82,7 +82,7 @@ router.route('/')
 
 router.route('/')
   .get((req, res) => {
-    const id = req.query.user;
+    const id = req.user.id
     if (id) {
       return Contact
         .query({ where: { created_by: id } })
@@ -123,7 +123,7 @@ router.route('/')
       twitter: twitter ? twitter : null,
       instagram: instagram ? instagram : null,
       github: github ? github : null,
-      created_by: 1
+      created_by: req.user.id
     }
 
     return new Contact(contact)

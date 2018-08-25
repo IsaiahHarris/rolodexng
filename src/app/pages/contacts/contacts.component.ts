@@ -59,7 +59,6 @@ export class ContactsComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
     this.backend.getContacts()
       .then(result => {
@@ -69,7 +68,6 @@ export class ContactsComponent implements OnInit {
         console.log(this.formData[0])
       })
   }
-
 
   editContact(contact) {
     this.backend.editContact(this.editFormData, contact.id)

@@ -22,7 +22,7 @@ export class BackendService {
   }
 
   getContacts() {
-    const contactUrl = this.url + 'contacts/?users=1';
+    const contactUrl = this.url + 'contacts';
     return this.http.get(contactUrl).toPromise()
   }
 
