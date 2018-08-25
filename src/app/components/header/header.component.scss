@@ -24,6 +24,13 @@
         color:#303030;
         &:hover{color: darken(blue, 20%)}
       }
+      .logout-button{
+        border:0;
+        padding:7px;
+        font-size:14px;
+        border-radius:10px;
+        &:hover{background-color: lighten(red, 20%)}
+      }
     }
   }
 }

@@ -20,7 +20,7 @@
       <a routerLink="login">Login</a>
     </li>
     <li *ngIf="isLoggedIn()">
-      <button (click)="logout()"></button>
+      <button class="logout-button" (click)="logout()">Logout</button>
     </li>
   </ul>
 </div>
