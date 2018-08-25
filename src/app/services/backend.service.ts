@@ -31,6 +31,11 @@ export class BackendService {
     return this.http.delete(contactUrl).toPromise();
   }
 
+  editContact(data, id) {
+    const editUrl = this.url + `contacts/?contact=${id}`
+    return this.http.put(editUrl, data).toPromise()
+  }
+
   register(data) {
     const registerUrl = this.url + 'register';
     return this.http.post(registerUrl, data).toPromise();

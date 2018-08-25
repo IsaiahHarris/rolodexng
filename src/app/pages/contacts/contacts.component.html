@@ -4,17 +4,24 @@
 
 <div class="main-container">
   <div class="contact-container" *ngFor="let contact of contacts">
+
     <div class="contact-header">
       <div class="contact-name">{{contact.name}}</div>
       <div (click)="deleteContact(contact)" class="delete-button">delete</div>
+      <div (click)="toggleEdit" class="edit-button">edit</div>
     </div>
-    <div *ngIf="contact.mobile" class="contact-detail">Mobile: {{contact.mobile}}</div>
-    <div *ngIf="contact.work" class="contact-detail">Work: {{contact.work}}</div>
-    <div *ngIf="contact.home" class="contact-detail">Home: {{contact.home}}</div>
-    <div *ngIf="contact.email" class="contact-detail">Email: {{contact.email}}</div>
-    <div *ngIf="contact.address" class="contact-detail">Address: {{contact.address}}</div>
-    <div *ngIf="contact.github" class="contact-detail"> Github: {{contact.github}}</div>
-    <div *ngIf="contact.instagram" class="contact-detail">Instagram: {{contact.instagram}}</div>
-    <div *ngIf="contact.twitter" class="contact-detail">Twitter: {{contact.twitter}}</div>
+    <div *ngIf="!toggleEdit()" class="contact-entry">
+      <div *ngIf="contact.mobile" class="contact-detail">Mobile: {{contact.mobile}}</div>
+      <div *ngIf="contact.work" class="contact-detail">Work: {{contact.work}}</div>
+      <div *ngIf="contact.home" class="contact-detail">Home: {{contact.home}}</div>
+      <div *ngIf="contact.email" class="contact-detail">Email: {{contact.email}}</div>
+      <div *ngIf="contact.address" class="contact-detail">Address: {{contact.address}}</div>
+      <div *ngIf="contact.github" class="contact-detail"> Github: {{contact.github}}</div>
+      <div *ngIf="contact.instagram" class="contact-detail">Instagram: {{contact.instagram}}</div>
+      <div *ngIf="contact.twitter" class="contact-detail">Twitter: {{contact.twitter}}</div>
+    </div>
+    <div class="editForm">
+
+    </div>
   </div>
 </div>

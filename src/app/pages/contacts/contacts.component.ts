@@ -9,6 +9,38 @@ import { BackendService } from '../../services/backend.service';
 export class ContactsComponent implements OnInit {
   user: string;
   contacts: any;
+  isEdit: boolean = false;
+  editFormData: {
+    name: string,
+    email: string,
+    address: string,
+    mobile: string,
+    work: string,
+    home: string,
+    twitter: string,
+    instagram: string,
+    github: string
+  } = {
+      name: '',
+      email: '',
+      address: '',
+      mobile: '',
+      work: '',
+      home: '',
+      twitter: '',
+      instagram: '',
+      github: ''
+    }
+
+  toggleEdit() {
+    if (this.isEdit) {
+      this.isEdit = false;
+
+    } else {
+      this.isEdit = true;
+
+    }
+  }
 
   constructor(private backend: BackendService) {
     this.user = 'Isaiah';
@@ -26,6 +58,21 @@ export class ContactsComponent implements OnInit {
     this.backend.getContacts()
       .then(result => {
         this.sortContacts(result)
+      })
+  }
+
+  editContact(contact) {
+    this.backend.editContact(this.editFormData, contact.id)
+      .then(response => {
+        this.editFormData.name = '';
+        this.editFormData.address = '';
+        this.editFormData.github = '';
+        this.editFormData.mobile = '';
+        this.editFormData.home = '';
+        this.editFormData.work = '';
+        this.editFormData.instagram = '';
+        this.editFormData.twitter = '';
+        this.editFormData.email = '';
       })
   }
 
