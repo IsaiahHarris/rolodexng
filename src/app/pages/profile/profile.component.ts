@@ -13,7 +13,18 @@ import { BackendService } from '../../services/backend.service';
 export class ProfileComponent implements OnInit {
   user: object;
   loggedIn: boolean = false;
-  userProfile: object;
+  userProfile
+  isEdit: boolean = false;
+
+  editProfileFormData: {
+    name: string,
+    email: string,
+    address: string,
+  } = {
+      name: '',
+      email: '',
+      address: '',
+    }
 
   constructor(
     private session: SessionService,
@@ -23,8 +34,24 @@ export class ProfileComponent implements OnInit {
   ) {
     this.user = session.getSession();
     this.loggedIn = this.session.isLoggedIn();
+    this.userProfile = ''
   }
 
+  toggleEdit() {
+    if (this.isEdit) {
+      this.isEdit = false;
+    } else {
+      this.isEdit = true;
+    }
+  }
+
+  editProfile(profile) {
+    this.backend.editProfile(this.editProfileFormData, profile.id)
+      .then(result => {
+        this.ngOnInit()
+        this.toggleEdit()
+      })
+  }
   ngOnInit() {
     if (this.user) {
       this.backend.getProfile()

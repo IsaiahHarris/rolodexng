@@ -12,8 +12,15 @@ export class RegisterComponent {
 
   registerFormData: {
     username: string
+    name: string,
+    email: string,
+    address: string
+
   } = {
-      username: ''
+      username: '',
+      name: '',
+      email: '',
+      address: ''
     }
   constructor(
     private auth: AuthService,
