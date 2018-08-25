@@ -1,0 +1,32 @@
+.header-container{
+  display: flex;
+  width:100%;
+  justify-content: space-between;
+  height: 10vh;
+  font-size:20px;
+  margin-top:2%;
+  .header{
+    margin-left:44%
+  }
+  .edit-profile-button{
+    border:0;
+    height: fit-content;
+    padding:7px;
+    margin-right:20px;
+    background-color: lightblue;
+    border-radius:10px;
+    &:hover{background-color: darken(lightblue, 20%)}
+  }
+}
+
+.profile-body-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-top:20px;
+  height: 40%;
+  .detail{
+    font-size:18px;
+  }
+}
