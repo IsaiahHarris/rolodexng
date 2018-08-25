@@ -1,7 +1,7 @@
 <div class="header-container">
   <div class="header-title">ROLODEX</div>
   <ul>
-    <li *ngIf="!!(this.session.isLoggedIn())">
+    <li *ngIf="isLoggedIn()">
       Welcome, {{user.username}}
     </li>
     <li>
@@ -19,8 +19,8 @@
     <li *ngIf="!isLoggedIn()">
       <a routerLink="login">Login</a>
     </li>
-    <li *ngIf="!isLoggedIn()">
-      <a routerLink="logout">Logout</a>
+    <li *ngIf="isLoggedIn()">
+      <button (click)="logout()"></button>
     </li>
   </ul>
 </div>

@@ -19,11 +19,11 @@ export class HeaderComponent {
   }
 
   isLoggedIn() {
-
     return this.session.isLoggedIn()
   }
 
   logout() {
+    console.log('trying to logout')
     return this.auth.logout();
   }
 }

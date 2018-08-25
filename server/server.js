@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const routes = require('../routes');
 const PORT = process.env.PORT || 8080
 const User = require('./db/models/User')
+const bcrypt = require('bcrypt')
 app.use(express.static('../public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -121,8 +122,9 @@ app.post('/api/register', (req, res) => {
 
 
 app.get('/api/logout', (req, res) => {
+  console.log('logging out server')
   req.logout();
-  res.json({ sucess: true })
+  res.json({ success: true })
 });
 
 app.use('/api', routes);
