@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
+import { SessionService } from '../../services/session.service';
 
 @Component({
   templateUrl: './contacts.component.html',
@@ -7,7 +8,9 @@ import { BackendService } from '../../services/backend.service';
 })
 
 export class ContactsComponent implements OnInit {
-  user: string;
+  user: object;
+  userData: object;
+  formData: object;
   contacts: any;
   isEdit: boolean = false;
   editFormData: {
@@ -41,8 +44,11 @@ export class ContactsComponent implements OnInit {
     }
   }
 
-  constructor(private backend: BackendService) {
-    this.user = 'Isaiah';
+  constructor(
+    private backend: BackendService,
+    private session: SessionService
+  ) {
+    this.user = session.getSession();
     this.contacts = [];
   }
   sortContacts(result) {
@@ -53,12 +59,14 @@ export class ContactsComponent implements OnInit {
     });
   }
 
+
   ngOnInit() {
     this.backend.getContacts()
       .then(result => {
         this.sortContacts(result)
       })
   }
+
 
   editContact(contact) {
     this.backend.editContact(this.editFormData, contact.id)
