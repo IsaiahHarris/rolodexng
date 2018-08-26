@@ -36,6 +36,11 @@ export class BackendService {
     return this.http.put(editUrl, data).toPromise()
   }
 
+  searchContacts(data) {
+    const searchUrl = this.url + `contacts/search/${data}`
+    return this.http.get(searchUrl).toPromise();
+  }
+
   getContact(id) {
     const contactUrl = this.url + `contacts/${id}`
     return this.http.get(contactUrl).toPromise()

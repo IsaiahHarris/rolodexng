@@ -15,7 +15,7 @@ export class ContactsComponent implements OnInit {
   contacts: any;
   isEdit: boolean = false;
   contactId: string;
-
+  searchTerm
 
 
 
@@ -41,6 +41,26 @@ export class ContactsComponent implements OnInit {
       var textB = b.name
       return (textA > textB)
     });
+  }
+
+  deactivateSearch() {
+    if (this.searchTerm.length < 1) {
+      return this.backend.getContacts()
+        .then(contacts => {
+          this.contacts = contacts;
+        })
+    }
+  }
+
+
+
+
+
+  searchContacts() {
+    return this.backend.searchContacts(this.searchTerm)
+      .then(result => {
+        return this.contacts = result;
+      })
   }
 
   ngOnInit() {

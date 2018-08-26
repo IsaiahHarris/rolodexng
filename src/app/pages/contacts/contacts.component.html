@@ -1,8 +1,13 @@
 <div class="header-container">
   <div class="header-title" (onload)="showContacts()"> {{user.username}}'s Contacts:</div>
+  <form>
+    <input type="text" name="search" (keyup.enter)="searchContacts()" (keyup)="deactivateSearch()" [(ngModel)]="searchTerm" placeholder="Search For A Contact">
+    <button class="search_button" (click)="searchContacts()">Search</button>
+  </form>
 </div>
 
 <div class="main-container">
+
   <div class="contact-container" *ngFor="let contact of contacts">
     <div class="contact-header">
       <a class="contact-name" routerLink="{{contact.id}}">{{contact.name}}</a>
