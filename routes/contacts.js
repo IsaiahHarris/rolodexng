@@ -154,11 +154,13 @@ router.route('/')
   })
 
 
-router.route('/search/:term?user=:id')
+router.route('/search/:term')
   .get((req, res) => {
     const term = req.params.term;
+
     return Contact
       .query({ where: { name: term } })
+      .query({ where: { created_by: req.user.id } })
       .fetchAll()
       .then(contacts => {
         return res.json(contacts)
