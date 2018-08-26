@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../services/backend.service';
 import { SessionService } from '../../services/session.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   templateUrl: './contacts.component.html',
@@ -13,40 +14,23 @@ export class ContactsComponent implements OnInit {
   formData: object;
   contacts: any;
   isEdit: boolean = false;
-  editFormData: {
-    name: string,
-    email: string,
-    address: string,
-    mobile: string,
-    work: string,
-    home: string,
-    twitter: string,
-    instagram: string,
-    github: string
-  } = {
-      name: '',
-      email: '',
-      address: '',
-      mobile: '',
-      work: '',
-      home: '',
-      twitter: '',
-      instagram: '',
-      github: ''
-    }
+  contactId: string;
+
+
+
 
   toggleEdit() {
     if (this.isEdit) {
       this.isEdit = false;
     } else {
       this.isEdit = true;
-
     }
   }
 
   constructor(
     private backend: BackendService,
-    private session: SessionService
+    private session: SessionService,
+    private route: ActivatedRoute
   ) {
     this.user = session.getSession();
     this.contacts = [];
@@ -65,17 +49,11 @@ export class ContactsComponent implements OnInit {
         this.sortContacts(result)
         this.userData = Object.assign({}, result);
         this.formData = Object.assign({}, result);
-        console.log(this.formData[0])
+        console.log(this.formData)
       })
   }
 
-  editContact(contact) {
-    this.backend.editContact(this.editFormData, contact.id)
-      .then(response => {
-        this.ngOnInit()
-        this.toggleEdit()
-      })
-  }
+
 
   deleteContact(contact) {
     this.backend.deleteContact(contact.id)

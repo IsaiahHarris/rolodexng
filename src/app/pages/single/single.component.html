@@ -1,0 +1,87 @@
+<div class="spec-contact-container" *ngIf="!this.isEdit">
+  <div (click)="toggleEdit()" class="edit-button">edit</div>
+  <div class="details">
+
+    <label>
+      Name:
+      <p>{{specContact.name}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Address:
+      <p>{{specContact.address}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Mobile:
+      <p>{{specContact.mobile}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Work:
+      <p>{{specContact.work}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Home:
+      <p>{{specContact.home}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Email:
+      <p>{{specContact.email}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Twitter:
+      <p>{{specContact.twitter}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Instagram:
+      <p>{{specContact.instagram}}</p>
+    </label>
+  </div>
+  <div class="details">
+    <label>
+      Github:
+      <p>{{specContact.github}}</p>
+    </label>
+  </div>
+</div>
+
+<!-- Editing body -->
+<div class="edit-container" *ngIf="this.isEdit">
+  <button (click)="toggleEdit()">Cancel</button>
+  <form>
+    <label for="name">Name:</label>
+    <input type="text" name="name" [(ngModel)]="editFormData.name" placeholder="{{this.specContact.name}}">
+    <label for="address">Address:</label>
+    <input type="text" name="address" [(ngModel)]="editFormData.address">
+    <label for="mobile">Mobile;</label>
+    <input type="text" name="mobile" [(ngModel)]="editFormData.mobile">
+    <label for="work">Work:</label>
+    <input type="text" name="work" [(ngModel)]="editFormData.work">
+    <label for="home">Home:</label>
+    <input type="text" name="home" [(ngModel)]="editFormData.home">
+    <label for="email">Email:</label>
+    <input type="text" name="email" [(ngModel)]="editFormData.email">
+    <label for="twitter">Twitter:</label>
+    <input type="text" name="twitter" [(ngModel)]="editFormData.twitter">
+    <label for="instagram">Instagram:</label>
+    <input type="text" name="instagram" [(ngModel)]="editFormData.instagram">
+    <label for="github">Github:</label>
+    <input type="text" name="github" [(ngModel)]="editFormData.github">
+    <div class="buttons">
+      <button (click)="editspecContact(specContact)">Submit</button>
+
+    </div>
+  </form>
+</div>

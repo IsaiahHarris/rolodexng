@@ -44,6 +44,7 @@ router.route('/')
   })
   .put((req, res) => {
     const id = req.query.contact;
+    console.log(id)
     const {
       name,
       address,
@@ -80,9 +81,22 @@ router.route('/')
   })
 
 
+router.get('/:id', (req, res) => {
+  const specId = req.params.id
+  console.log('specId', specId);
+  return Contact
+    .query({ where: { id: specId } })
+    .fetchAll()
+    .then(contact => {
+      return res.json(contact)
+    })
+})
+
 router.route('/')
   .get((req, res) => {
     const id = req.user.id
+
+
     if (id) {
       return Contact
         .query({ where: { created_by: id } })

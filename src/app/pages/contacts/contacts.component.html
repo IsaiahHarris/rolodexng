@@ -1,13 +1,12 @@
 <div class="header-container">
   <div class="header-title" (onload)="showContacts()"> {{user.username}}'s Contacts:</div>
 </div>
-
 <div class="main-container">
   <div class="contact-container" *ngFor="let contact of contacts">
     <div class="contact-header">
-      <div class="contact-name">{{contact.name}}</div>
+      <a class="name" routerLink="/contacts/{{contact.id}}">{{contact.name}}</a>
       <div (click)="deleteContact(contact)" class="delete-button">delete</div>
-      <div (click)="toggleEdit()" class="edit-button">edit</div>
+
     </div>
     <div class="contact-entry">
       <div *ngIf="contact.mobile" class="contact-detail">Mobile: {{contact.mobile}}</div>
@@ -19,51 +18,5 @@
       <div *ngIf="contact.instagram" class="contact-detail">Instagram: {{contact.instagram}}</div>
       <div *ngIf="contact.twitter" class="contact-detail">Twitter: {{contact.twitter}}</div>
     </div>
-  </div>
-  <div *ngIf="this.isEdit" class="edit-contact-form">
-    <form action="">
-      <div class="input-group">
-        <label for="name">Name:</label>
-        <input type="text" name="name" [(ngModel)]="editFormData.name">
-        <div class="errors">
-        </div>
-      </div>
-      <div class="input-group">
-        <label for="mobile">Mobile:</label>
-        <input type="text" name="mobile" [(ngModel)]="editFormData.mobile">
-      </div>
-      <div class="input-group">
-        <label for="address ">Address:</label>
-        <input type="text" name="address" value="contact.address" [(ngModel)]="editFormData.address">
-      </div>
-      <div class="input-group">
-        <label for="work">Work:</label>
-        <input type="text" name="work" value="contact.work" [(ngModel)]="editFormData.work">
-      </div>
-      <div class="input-group">
-        <label for="home">Home:</label>
-        <input type="text" name="home" value="contact.home" [(ngModel)]="editFormData.home">
-      </div>
-      <div class="input-group">
-        <label for="email">Email:</label>
-        <input type="text" name="email" value="contact.email" [(ngModel)]="editFormData.email">
-        <div class="errors">
-        </div>
-      </div>
-      <div class="input-group">
-        <label for="twitter">Twitter:</label>
-        <input type="text" name="twitter" value="contact.twitter" [(ngModel)]="editFormData.twitter">
-      </div>
-      <div class="input-group">
-        <label for="instagram">Instagram:</label>
-        <input type="text" name="instagram" value="contact.instagram" [(ngModel)]="editFormData.instagram">
-      </div>
-      <div class="input-group">
-        <label for="github">Github:</label>
-        <input type="text" name="github" value="contact.github" [(ngModel)]="editFormData.github">
-      </div>
-      <button (click)="editContact(contact, contact.id)">Submit</button>
-    </form>
-
   </div>
 </div>

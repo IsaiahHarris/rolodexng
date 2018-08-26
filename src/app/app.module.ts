@@ -20,6 +20,7 @@ import { HeaderComponent } from './components/header/header.components';
 import { BackendService } from './services/backend.service';
 import { SessionService } from './services/session.service';
 import { AuthService } from './services/auth.service';
+import { SingleComponent } from './pages/single/single.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AuthService } from './services/auth.service';
     ContactsComponent,
     RegisterComponent,
     LogoutComponent,
-    ProfileComponent
+    ProfileComponent,
+    SingleComponent
   ],
   imports: [
     BrowserModule,
@@ -43,9 +45,11 @@ import { AuthService } from './services/auth.service';
         { path: 'login', component: LoginComponent },
         { path: 'addcontact', component: AddContactComponent },
         { path: 'contacts', component: ContactsComponent },
+        { path: 'contacts/:id', component: SingleComponent },
         { path: 'register', component: RegisterComponent },
         { path: 'logout', component: LogoutComponent },
         { path: 'profile', component: ProfileComponent },
+
         { path: '**', redirectTo: '', pathMatch: 'full' }
       ]
     )
