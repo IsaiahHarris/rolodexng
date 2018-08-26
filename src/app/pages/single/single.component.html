@@ -59,7 +59,7 @@
 
 <!-- Editing body -->
 <div class="edit-contact-form" *ngIf="this.isEdit">
-  <button (click)="toggleEdit()">ⓧ</button>
+  <div class="x-div" (click)="toggleEdit()">ⓧ</div>
   <form class="edit-form">
     <label for="name">Name:</label>
     <input type="text" name="name" [(ngModel)]="editFormData.name" placeholder="{{this.specContact.name}}">

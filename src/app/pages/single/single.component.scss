@@ -23,3 +23,10 @@ justify-content: space-evenly;
 align-items:center;
 flex-direction: column;
 }
+
+.x-div{
+  height:1vh;
+  width:1vh;
+  color: transparent;  
+  text-shadow: 0 0 0 red;
+}
