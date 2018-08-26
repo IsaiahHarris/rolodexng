@@ -1,4 +1,4 @@
-<div class="spec-contact-container" *ngIf="!this.isEdit">
+<div class="spec-contact-container">
   <div (click)="toggleEdit()" class="edit-button">edit</div>
   <div class="details">
 
@@ -58,9 +58,9 @@
 </div>
 
 <!-- Editing body -->
-<div class="edit-container" *ngIf="this.isEdit">
-  <button (click)="toggleEdit()">Cancel</button>
-  <form>
+<div class="edit-contact-form" *ngIf="this.isEdit">
+  <button (click)="toggleEdit()">ⓧ</button>
+  <form class="edit-form">
     <label for="name">Name:</label>
     <input type="text" name="name" [(ngModel)]="editFormData.name" placeholder="{{this.specContact.name}}">
     <label for="address">Address:</label>
@@ -80,7 +80,7 @@
     <label for="github">Github:</label>
     <input type="text" name="github" [(ngModel)]="editFormData.github">
     <div class="buttons">
-      <button (click)="editspecContact(specContact)">Submit</button>
+      <button (click)="editContact(specContact)">Submit</button>
 
     </div>
   </form>
