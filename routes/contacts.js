@@ -154,7 +154,7 @@ router.route('/')
   })
 
 
-router.route('/search/:term')
+router.route('/search/:term?user=:id')
   .get((req, res) => {
     const term = req.params.term;
     return Contact
