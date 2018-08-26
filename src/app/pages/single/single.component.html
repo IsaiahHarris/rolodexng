@@ -1,59 +1,18 @@
-<div class="spec-contact-container">
-  <div (click)="toggleEdit()" class="edit-button">edit</div>
-  <div class="details">
-
-    <label>
-      Name:
-      <p>{{specContact.name}}</p>
-    </label>
+<div class="contact-container">
+  <div class="contact-header">
+    <a class="contact-name" routerLink="{{specContact.id}}">{{specContact.name}}</a>
+    <div (click)="deleteContact(contact)" class="delete-button">delete</div>
+    <div (click)="toggleEdit()" class="edit-button">edit</div>
   </div>
-  <div class="details">
-    <label>
-      Address:
-      <p>{{specContact.address}}</p>
-    </label>
-  </div>
-  <div class="details">
-    <label>
-      Mobile:
-      <p>{{specContact.mobile}}</p>
-    </label>
-  </div>
-  <div class="details">
-    <label>
-      Work:
-      <p>{{specContact.work}}</p>
-    </label>
-  </div>
-  <div class="details">
-    <label>
-      Home:
-      <p>{{specContact.home}}</p>
-    </label>
-  </div>
-  <div class="details">
-    <label>
-      Email:
-      <p>{{specContact.email}}</p>
-    </label>
-  </div>
-  <div class="details">
-    <label>
-      Twitter:
-      <p>{{specContact.twitter}}</p>
-    </label>
-  </div>
-  <div class="details">
-    <label>
-      Instagram:
-      <p>{{specContact.instagram}}</p>
-    </label>
-  </div>
-  <div class="details">
-    <label>
-      Github:
-      <p>{{specContact.github}}</p>
-    </label>
+  <div class="contact-entry">
+    <div class="contact-detail">Mobile: {{specContact.mobile}}</div>
+    <div class="contact-detail">Work: {{specContact.work}}</div>
+    <div class="contact-detail">Home: {{specContact.home}}</div>
+    <div class="contact-detail">Email: {{specContact.email}}</div>
+    <div class="contact-detail">Address: {{specContact.address}}</div>
+    <div class="contact-detail"> Github: {{specContact.github}}</div>
+    <div class="contact-detail">Instagram: {{specContact.instagram}}</div>
+    <div class="contact-detail">Twitter: {{specContact.twitter}}</div>
   </div>
 </div>
 
@@ -81,7 +40,6 @@
     <input type="text" name="github" [(ngModel)]="editFormData.github">
     <div class="buttons">
       <button (click)="editContact(specContact)">Submit</button>
-
     </div>
   </form>
 </div>

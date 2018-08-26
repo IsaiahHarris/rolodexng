@@ -16,31 +16,7 @@
   
 }
 
-.contact-container{
-  margin:3%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fff;
-  width: 260px;
-  height: 260px;
-  font-size:95%;
-  font-family:'Roboto', sans-serif;
-  padding:15px;
-  .contact-header{
-    display: flex;
-    justify-content: space-between;
-    width:100%;
-    border-bottom: 0.5px solid #cdcdcd;
-    .contact-name{
-      padding-bottom:7px;
-      height:30px;
-    }
-  }
-  .contact-detail{
-    margin-top:3px;
-  }
-}
+
 .edit-contact-form{
   z-index: 1;
   width: 100%;

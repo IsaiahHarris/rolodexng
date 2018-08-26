@@ -69,8 +69,14 @@ export class SingleComponent implements OnInit {
     this.contactId = this.route.snapshot.paramMap.get('id');
     return this.backend.getContact(this.contactId)
       .then(contact => {
-        console.log(contact[0])
         return this.specContact = contact[0];
+      })
+  }
+
+  deleteContact(contact) {
+    this.backend.deleteContact(contact.id)
+      .then(result => {
+        this.ngOnInit()
       })
   }
 }

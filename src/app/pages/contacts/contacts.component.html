@@ -1,12 +1,12 @@
 <div class="header-container">
   <div class="header-title" (onload)="showContacts()"> {{user.username}}'s Contacts:</div>
 </div>
+
 <div class="main-container">
   <div class="contact-container" *ngFor="let contact of contacts">
     <div class="contact-header">
-      <a class="name" routerLink="/contacts/{{contact.id}}">{{contact.name}}</a>
+      <a class="contact-name" routerLink="{{contact.id}}">{{contact.name}}</a>
       <div (click)="deleteContact(contact)" class="delete-button">delete</div>
-
     </div>
     <div class="contact-entry">
       <div *ngIf="contact.mobile" class="contact-detail">Mobile: {{contact.mobile}}</div>
