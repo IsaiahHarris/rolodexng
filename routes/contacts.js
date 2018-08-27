@@ -95,8 +95,6 @@ router.get('/:id', (req, res) => {
 router.route('/')
   .get((req, res) => {
     const id = req.user.id
-
-
     if (id) {
       return Contact
         .query({ where: { created_by: id } })
@@ -157,7 +155,6 @@ router.route('/')
 router.route('/search/:term')
   .get((req, res) => {
     const term = req.params.term;
-
     return Contact
       .query({ where: { name: term } })
       .query({ where: { created_by: req.user.id } })

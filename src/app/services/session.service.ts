@@ -48,6 +48,7 @@ export class SessionService {
   }
 
   isLoggedIn() {
+    console.log('this.user.loggedIn', this.user.loggedIn)
     return this.user.loggedIn
   }
 }

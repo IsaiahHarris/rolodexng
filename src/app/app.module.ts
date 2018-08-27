@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { forwardRef, Injectable, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,6 +21,7 @@ import { BackendService } from './services/backend.service';
 import { SessionService } from './services/session.service';
 import { AuthService } from './services/auth.service';
 import { SingleComponent } from './pages/single/single.component';
+import { AuthGuard } from './services/guard.service';
 
 @NgModule({
   declarations: [
@@ -41,15 +42,14 @@ import { SingleComponent } from './pages/single/single.component';
     HttpClientModule,
     RouterModule.forRoot(
       [
-        { path: '', component: HomeComponent },
+        { path: '', canActivate: [AuthGuard], component: HomeComponent },
         { path: 'login', component: LoginComponent },
-        { path: 'addcontact', component: AddContactComponent },
-        { path: 'contacts', component: ContactsComponent },
-        { path: 'contacts/:id', component: SingleComponent },
+        { path: 'addcontact', canActivate: [AuthGuard], component: AddContactComponent },
+        { path: 'contacts', canActivate: [AuthGuard], component: ContactsComponent },
+        { path: 'contacts/:id', canActivate: [AuthGuard], component: SingleComponent, },
         { path: 'register', component: RegisterComponent },
         { path: 'logout', component: LogoutComponent },
-        { path: 'profile', component: ProfileComponent },
-
+        { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent, },
         { path: '**', redirectTo: '', pathMatch: 'full' }
       ]
     )
@@ -57,7 +57,8 @@ import { SingleComponent } from './pages/single/single.component';
   providers: [
     BackendService,
     SessionService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
